@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "user_tasks")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -13,11 +14,15 @@ import javax.persistence.*;
 public class UserTaskEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long    id;
-  private String  taskTitle;
+  private Long id;
+
+  @Column(name = "task_title")
+  private String taskTitle;
+
+  @Column(name = "task_completed")
   private Boolean taskCompleted;
 
-  @ManyToOne
-  @JoinColumn(name = "id")
-  private UserEntity user;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id")
+  private UserEntity usr;
 }

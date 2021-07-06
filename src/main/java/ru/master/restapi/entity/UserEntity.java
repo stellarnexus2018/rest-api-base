@@ -10,6 +10,7 @@ import java.util.List;
  * Сущность для представления "Пользователь"
  */
 @Entity
+@Table(name = "users")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -18,15 +19,32 @@ import java.util.List;
 public class UserEntity {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private Long          id;
-  private String        firstName;
-  private String        secondName;
-  private String        patronymic;
-  private String        login;
-  private String        password;
-  private Integer       age;
+  private Long id;
+
+  @Column(name = "first_name")
+  private String firstName;
+
+  @Column(name = "last_name")
+  private String lastName;
+
+  @Column(name = "patronymic")
+  private String patronymic;
+
+  @Column(name = "login")
+  private String login;
+
+  @Column(name = "password")
+  private String password;
+
+  @Column(name = "age")
+  private Integer age;
+
+  @Column(name = "status")
+  private Integer status;
+
+  @Column(name = "vdat")
   private LocalDateTime vdat;
 
-  @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+  @OneToMany(mappedBy = "usr", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
   private List<UserTaskEntity> userTaskEntityList;
 }

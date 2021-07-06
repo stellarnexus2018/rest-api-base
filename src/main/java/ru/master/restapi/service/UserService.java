@@ -32,12 +32,12 @@ public class UserService {
 
   /**
    * Сохранение сущности "Пользователь"
-    * @param userEntity Сущность "Пользователь" на сохранение
+   * @param userEntity Сущность "Пользователь" на сохранение
    * @return Сохранённая сущность
    * @throws UserAlreadyExistsException
    */
   public UserEntity registerUser(UserEntity userEntity) throws UserAlreadyExistsException {
-    if (userRepository.findByFirstNameAndAndSecondNameAndPatronymic(userEntity.getFirstName(), userEntity.getSecondName(), userEntity.getPatronymic()) != null) {
+    if (userRepository.findByFirstNameAndLastNameAndPatronymic(userEntity.getFirstName(), userEntity.getLastName(), userEntity.getPatronymic()) != null) {
       throw new UserAlreadyExistsException("Такой пользователь уже существует");
     }
     return userRepository.save(userEntity);

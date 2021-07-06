@@ -7,5 +7,5 @@ import ru.master.restapi.entity.UserEntity;
  *  Репозиторий для сущности "Пользователь"
  */
 public interface UserRepository extends CrudRepository<UserEntity, Long> {
-  UserEntity findByFirstNameAndAndSecondNameAndPatronymic(String firstName, String secondName, String patronymic);
+  UserEntity findByFirstNameAndLastNameAndPatronymic(String firstName, String lastName, String patronymic);
 }
