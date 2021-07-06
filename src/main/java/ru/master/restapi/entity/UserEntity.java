@@ -45,6 +45,6 @@ public class UserEntity {
   @Column(name = "vdat")
   private LocalDateTime vdat;
 
-  @OneToMany(mappedBy = "usr", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "usr", cascade = CascadeType.ALL)
   private List<UserTaskEntity> userTaskEntityList;
 }

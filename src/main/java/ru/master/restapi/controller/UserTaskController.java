@@ -7,11 +7,12 @@ import ru.master.restapi.entity.UserEntity;
 import ru.master.restapi.entity.UserTaskEntity;
 import ru.master.restapi.exception.UserAlreadyExistsException;
 import ru.master.restapi.exception.UserNotFoundException;
+import ru.master.restapi.exception.UserTaskNotFoundException;
 import ru.master.restapi.service.UserService;
 import ru.master.restapi.service.UserTaskService;
 
 @RestController
-@RequestMapping(name = "/tasks")
+@RequestMapping("/tasks")
 public class UserTaskController {
   // region Поля
 
@@ -33,18 +34,16 @@ public class UserTaskController {
   /**
    * Создание/Сохранение сущности "Задание" в БД
    * @param userTaskEntity Сохраняемая сущность
-   * @param userId ID пользователя
+   * @param id ID пользователя
    * @return Строка состояния выполнения процесса
    */
   @PostMapping
-  public ResponseEntity<String> addUserTask(@RequestBody  UserTaskEntity userTaskEntity,
-                                            @RequestParam Long           userId) {
+  public ResponseEntity addUserTask(@RequestBody  UserTaskEntity userTaskEntity, @RequestParam Long id) {
     try {
-      /*userTaskService.addUserTask(userTaskEntity);*/
-      return ResponseEntity.ok("Задание добавлено");
-    } /*catch (UserAlreadyExistsException ex) {
+      return ResponseEntity.ok(userTaskService.addUserTask(userTaskEntity, id));
+    } catch (UserNotFoundException ex) {
       return ResponseEntity.badRequest().body(ex.getLocalizedMessage());
-    }*/ catch (Exception ex) {
+    } catch (Exception ex) {
       return ResponseEntity.badRequest().body("Что-то пошло не так...");
     }
   }
@@ -58,13 +57,14 @@ public class UserTaskController {
    * @param userTaskId ID задания
    * @return Объект состояния процесса
    */
-  @GetMapping
+  @PutMapping
   public ResponseEntity completeUserTask(@RequestParam(name = "id") Long userTaskId) {
     try {
-      return ResponseEntity.ok(""/*userTaskService.getOneUser(userTaskId)*/);
-    } /*catch (UserNotFoundException ex) {
+      UserTaskEntity userTaskEntity = userTaskService.completeUserTask(userTaskId);
+      return ResponseEntity.ok("Задание выполнено");
+    } catch (UserTaskNotFoundException ex) {
       return ResponseEntity.badRequest().body(ex.getLocalizedMessage());
-    }*/ catch (Exception ex) {
+    } catch (Exception ex) {
       return ResponseEntity.badRequest().body("Что-то пошло не так...");
     }
   }

@@ -22,7 +22,7 @@ public class UserTaskEntity {
   @Column(name = "task_completed")
   private Boolean taskCompleted;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   @JoinColumn(name = "user_id")
   private UserEntity usr;
 }
