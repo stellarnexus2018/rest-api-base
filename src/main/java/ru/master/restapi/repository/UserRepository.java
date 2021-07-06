@@ -1,7 +1,6 @@
 package ru.master.restapi.repository;
 
 import org.springframework.data.repository.CrudRepository;
-import org.springframework.http.ResponseEntity;
 import ru.master.restapi.entity.UserEntity;
 
 /**
@@ -9,6 +8,4 @@ import ru.master.restapi.entity.UserEntity;
  */
 public interface UserRepository extends CrudRepository<UserEntity, Long> {
   UserEntity findByFirstNameAndAndSecondNameAndPatronymic(String firstName, String secondName, String patronymic);
-
-
 }
