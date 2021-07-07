@@ -8,6 +8,9 @@ import ru.master.restapi.exception.UserAlreadyExistsException;
 import ru.master.restapi.exception.UserNotFoundException;
 import ru.master.restapi.repository.UserRepository;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 /**
  * Подсистема для работы с бизнес и системной логикой сущности "Пользователь"
  */
@@ -62,4 +65,19 @@ public class UserService {
   }
 
   // endregion getOneUser
+
+  // region getAllUsers
+
+  /**
+   * Получение полного списка сущностей "Пользователь" в БД
+   * @return Сущность "Пользователь"
+   * @throws UserNotFoundException
+   */
+  public List<UserDto> getAllUsers() throws UserNotFoundException {
+    List<UserEntity> userEntities = (List<UserEntity>) userRepository.findAll();
+
+    return userEntities.stream().map(UserDto::toDto).collect(Collectors.toList());
+  }
+
+  // endregion getAllUsers
 }
