@@ -37,7 +37,7 @@ public class UserController {
    * @return Строка состояния выполнения процесса
    */
   @PostMapping
-  public ResponseEntity<String> registerUser(@RequestBody UserEntity userEntity) {
+  public ResponseEntity<?> registerUser(@RequestBody UserEntity userEntity) {
     try {
       userService.registerUser(userEntity);
       return ResponseEntity.ok("Пользователь сохранён");
@@ -58,7 +58,7 @@ public class UserController {
    * @return Объект состояния процесса получения целевой сущности
    */
   @GetMapping
-  public ResponseEntity getOneUser(@RequestParam(name = "id") Long userId) {
+  public ResponseEntity<?> getOneUser(@RequestParam(name = "id") Long userId) {
     try {
       return ResponseEntity.ok(userService.getOneUser(userId));
     } catch (UserNotFoundException ex) {

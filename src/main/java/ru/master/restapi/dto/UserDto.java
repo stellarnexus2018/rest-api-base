@@ -8,9 +8,7 @@ import ru.master.restapi.entity.UserEntity;
  */
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
-@Setter
-@ToString
+@Data
 @Builder
 public class UserDto {
   private Long    id;
