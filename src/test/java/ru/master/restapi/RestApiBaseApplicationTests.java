@@ -19,4 +19,13 @@ class RestApiBaseApplicationTests {
 	void testLocalDateTime() {
 		System.out.println("Проверка: " + LocalDateTime.now());
 	}
+
+	/**
+	 * Проверка вывода тестовой метки времени
+	 */
+	@Test
+	void testLocalDateTimeNew() {
+		System.out.println("Проверка: " + LocalDateTime.now());
+		System.out.println("Ну и ещё одна проверка!");
+	}
 }
